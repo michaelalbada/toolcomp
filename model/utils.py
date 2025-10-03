@@ -1,5 +1,5 @@
 
-from model.models import LiteLLMWrapper
+from model.models import LiteLLMWrapper, AzureOpenAIWrapper
 from model.types import GENERATION_STRATEGY
 
 
@@ -7,6 +7,8 @@ def load_model(model, generation_strategy, sampling_params):
 
     if generation_strategy == GENERATION_STRATEGY.LITELLM.value:
         return LiteLLMWrapper(model, sampling_params)
+    if generation_strategy == GENERATION_STRATEGY.AZURE_OPENAI.value:
+        return AzureOpenAIWrapper(model, sampling_params)
     else:
         raise ValueError(f"Unsupported model strategy: {generation_strategy}")
     
